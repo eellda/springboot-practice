@@ -85,3 +85,22 @@
 - 각 영역이 독립적으로 구성되어 분업 및 협업이 원활해짐
 - 한 영역을 업데이트 하더라도 다런 곳에 영향 X
 
+#### @RestController
+- Spring Framework 4버전부터 사용 가능한 어노테이션
+- @Controller + @ResponseBody
+- 컨트롤러 class 하위 method에 @ResponseBody를 달지 않아도 문자열과 JSON등 전송 가능
+- View 를 거치지 않고 HTTP ResponseBody 에 직접 Return 값을 담아 보냄
+
+#### @RequestMapping
+- MVC의 Handler Mapping 을 위해서 DefaultAnnotationHandlerMapping 사용
+- DefaultAnnotationHandlerMapping 매핑정보로 @RequestMapping 를 활용
+- Class 와 method의 RequestMapping을 통해 URL를 mapping하여 경로를 설정해 해당 method에서 처리
+  - value - url
+  - method - GET, POST, DELETE, PUT 등
+
+- Spring 4.3 부터 간단한 어노테이션 사용 가능
+  - @GetMapping
+  - @PutMapping
+  - @PostMapping
+  - @DeleteMapping
+

@@ -15,6 +15,9 @@
 - Spring Configuration Processer
 - Spring Web
 
+### Tools
+- PostMan
+
 
 ### Spring Boot REST API
 - REST
@@ -133,3 +136,14 @@
 - GET 형식의 요청에서 쿼리 문자열을 전달하기 위해 사용
 - key와 value 가 정해져있으나 받아야할 파라미터가 많을 경우에 DTO 객체를 사용
 - getRequest(Member member) {}
+
+
+#### POST API
+- resource를 추가하기 위해 사용되는 API
+- @PostMapping
+  - @RequestMapping + POST Method
+- 일반적으로 추가하고자 하는 resource를 HTTP body에 추가해 서버에 요청
+  - @RequestBody를 이용하여 body에 담겨있는 값을 받아야함
+- DTO 객체 사용 가능
+
+

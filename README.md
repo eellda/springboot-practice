@@ -52,3 +52,11 @@
 - Resource 의 이름이나 URI가 길어질 경우 - 를 사용하여 가동성 높임
 - _ 사용 X
 - 파일 확장자 표현 X
+
+#### 설정 library
+- Spring Boot Starter Parent
+  - 라이브러리 간의 버전 충돌 문제가 발생하는걸 방지
+- Spring Boot Starter Web
+  - Spring MVC를 사용한 REST 서비스 개발에 사용
+- Spring Boot Starter Test
+  - JUnit, Hamcrest, Mockito 를 포함한 Spring Application Test의 기능

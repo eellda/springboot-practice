@@ -104,3 +104,7 @@
   - @PostMapping
   - @DeleteMapping
 
+#### DB 연결
+- https://mariadb.com/downloads/
+  - use UTF-8 check
+- 설치 후 환경변수 - path - 편집 - mariadb 폴더의 bin 추가

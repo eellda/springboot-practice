@@ -60,3 +60,28 @@
   - Spring MVC를 사용한 REST 서비스 개발에 사용
 - Spring Boot Starter Test
   - JUnit, Hamcrest, Mockito 를 포함한 Spring Application Test의 기능
+
+
+#### MVC Pattern
+- Model, View, Controller 의 줄임말로 application을 구성할 때 구성요소를 3개의 역할로 구분한 패턴
+
+#### Controller
+- Model 과 View 사이에서 브릿지 역할을 수행함
+  - app의 user로부터 입력에 대한 응답으로 model 및 view 를 업데이트하는 로직을 포함함
+  - user의 요청은 모두 controller를 통해서 진행되야 함
+  - 들어온 요청은 어떻게 처리할지 결정한 후 model로 전달
+
+#### Model
+- 데이터를 처리하는 영역
+  - DAO와 DO로 구성 (무조건 따라해야 하는건 아님)
+
+#### View
+- 데이터를 보여주는 화면 자체의 영역
+  - UI 요소들이 포함되며 데이터를 각 요소에 배치함
+  - 별도의 데이터를 보관하지 않음
+
+#### 특징
+- application의 역할을 세 구간으로 나눔으로써 서로간의 의존성이 낮아짐
+- 각 영역이 독립적으로 구성되어 분업 및 협업이 원활해짐
+- 한 영역을 업데이트 하더라도 다런 곳에 영향 X
+

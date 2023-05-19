@@ -108,3 +108,28 @@
 - https://mariadb.com/downloads/
   - use UTF-8 check
 - 설치 후 환경변수 - path - 편집 - mariadb 폴더의 bin 추가
+
+#### @RequestMapping
+- value 와 method 로 정의하여 API를 개발하는 방식
+- 현재는 고전적인 방식
+
+#### @GetMapping(value)
+- 별도의 param 없이 GET API를 호출
+
+#### @PathVariable
+- GET 형식의 요청에서 파라미터를 전달하기 위해 URL에 값을 담아 요청하는 방법
+  - @GetMapping("/hello/{world}")
+  - method(@PathVariable String world)
+- @GetMapping 에서 사용된 {변수}의 이름과 메서드의 매개변수를 다를 경우 사용
+  - @GetMapping("/hello/{world}")
+  - method(@PathVariable("world") String nice)
+
+#### @RequestParam
+- GET 형식의 요청에서 쿼리 문자열을 전달하기 위해 사용
+- ?를 기준으로 키=값형태로 전달 / 복수는 &를 사용
+- 어떤 요청 값이 들어올지 모를 경우 Map<>을 사용함
+
+#### DTO 사용
+- GET 형식의 요청에서 쿼리 문자열을 전달하기 위해 사용
+- key와 value 가 정해져있으나 받아야할 파라미터가 많을 경우에 DTO 객체를 사용
+- getRequest(Member member) {}

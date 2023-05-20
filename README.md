@@ -223,3 +223,30 @@ This library supports:
 - OAuth 2
 - GraalVM native images
 ![2023-05-20 195319](https://github.com/eellda/springboot-practice/assets/111367394/ad49004b-29af-46aa-9da6-1587f6083912)
+
+#### 명세서를 추가하기 위해
+```java
+@OpenAPIDefinition(
+        info = @Info(
+                title = "spring Boot API Test",
+                description = "API 명세서",
+                version = "1.0.0",
+                contact = @Contact(
+                        name = "sm",
+                        email = "test@test.co.kr"
+                )
+        )
+)
+추가
+```
+
+#### PUT API
+- 해당 resource 가 존재하면 갱신하고, resource 가 없을 경우에는 새로 생성해주는 API
+- Update를 위한 method
+- 기본 방식은 Post API와 동일함
+
+#### DELETE API
+- 서버를 통해 resource 를 삭제하기 위해 사용하는 API
+- 일반적으로 @PathVariable을 통해 resource id 등을 받아서 처리
+
+

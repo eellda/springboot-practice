@@ -1,6 +1,6 @@
-package data.dao;
+package com.example.demo.data.dao;
 
-import data.entity.ProductEntity;
+import com.example.demo.data.entity.ProductEntity;
 
 public interface ProductDAO {
     ProductEntity saveProduct(ProductEntity productEntity);

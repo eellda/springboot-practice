@@ -1,6 +1,6 @@
-package data.repository;
+package com.example.demo.data.repository;
 
-import data.entity.ProductEntity;
+import com.example.demo.data.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // JpaRepository<repository가 사용할 entity, id값의 datatype>

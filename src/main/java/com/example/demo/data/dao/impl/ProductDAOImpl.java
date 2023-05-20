@@ -1,8 +1,8 @@
-package data.dao.impl;
+package com.example.demo.data.dao.impl;
 
-import data.dao.ProductDAO;
-import data.entity.ProductEntity;
-import data.repository.ProductRepository;
+import com.example.demo.data.dao.ProductDAO;
+import com.example.demo.data.entity.ProductEntity;
+import com.example.demo.data.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

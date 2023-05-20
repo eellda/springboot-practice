@@ -108,6 +108,7 @@
   - @DeleteMapping
 
 #### DB 연결
+
 - https://mariadb.com/downloads/
   - use UTF-8 check
 - 설치 후 환경변수 - path - 편집 - mariadb 폴더의 bin 추가
@@ -146,7 +147,8 @@
   - @RequestBody를 이용하여 body에 담겨있는 값을 받아야함
 - DTO 객체 사용 가능
 
-#### Swagger
+### Swagger
+---
 - 협업을 위해 필요한 library
 - 서버로 요청되는 API list 를 HTML 화면으로 문서화 하여 테스트를 할 수 있는 library
 - 서버가 가동 되면서 @RestController 를 읽어 API를 분석하여 HTML문서를 작성함
@@ -179,6 +181,7 @@ implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 </dependency>
 ```
 
+---
 ### 에러 발생
 ```java
 ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'apiDocumentationScanner' defined in URL ~~~
@@ -249,4 +252,36 @@ This library supports:
 - 서버를 통해 resource 를 삭제하기 위해 사용하는 API
 - 일반적으로 @PathVariable을 통해 resource id 등을 받아서 처리
 
+#### ResponseEntity
+- Spring Framework에서 제공하는 class 중 HttpEntity class를 inheritance 받아 사용하는 class
+- 사용자의 HttpRequest에 대한 response data를 포함
+  - HttpStatus
+  - HttpHeaders
+  - HttpBody
+
+### Lombok
+---
+- 반복되는 method를 Annotation을 사용하여 자동으로 작성해주는 library
+- 일반적으로 VO, DTO, Model, Entity 등의 Data class에서 주로 사용
+
+#### 대표적 Annotation
+```java
+@Getter
+@Setter
+@NoArgConstructor
+@AllArgConstructor
+@Data
+@ToString
+```
+
+- @NoArgConstructor - parameter가없는 constructor 를 생성
+- @AllArgConstructor - 모든 필드값을 parameter로 갖는 constructor를 생성
+- @RequiredArgsConstructor - 필드값중 final이나 @NotNull 인 값을 갖는 constructor 생성
+- @EqualsAndHashCode - equals와 hashcode 메서드를 자동으로 생성
+  - equals - 내용이 같은지
+  - hashcode - 같은 객체인지
+  - callsuper - true 면 부모 클래스 필드 값들도 동일한지 체크
+
+-@Data
+  - @Getter / @Setter / @RequiredArgsConstructor / @ToString / @EqualsAndHashCode 를 한번에 추가
 

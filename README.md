@@ -345,3 +345,38 @@ This library supports:
 > 구현도
 ![화면 캡처 2023-05-21 010843](https://github.com/eellda/springboot-practice/assets/111367394/6685ff0c-d9dd-4456-b5cd-63a15786213a)
 
+
+### Database 연결 설정
+```java
+#h2 database setting
+spring.h2.console.enabled=true
+
+# MariaDB database setting
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://localhost:3306/database 이름
+spring.datasource.username=
+spring.datasource.password=
+
+#JPA setting
+spring.jpa.hibernate.ddl-auto=
+spring.jpa.show-sql=
+```
+
+의존성 설정
+```java
+// 가장 최신 버전 사용
+implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+```
+
+####  결과
+---
+repository에 설정된 table 생성
+![화면 캡처 2023-05-21 022359](https://github.com/eellda/springboot-practice/assets/111367394/eb844a1c-096d-48d0-9738-448ec5413a5c)
+![화면 캡처 2023-05-21 022533](https://github.com/eellda/springboot-practice/assets/111367394/86dd95a2-68e5-47d7-852b-07f025184393)
+
+Post 동작
+![화면 캡처 2023-05-21 022741](https://github.com/eellda/springboot-practice/assets/111367394/bd236326-f4f8-445a-bc11-dca4ea7bb4ab)
+
+Get 동작
+![화면 캡처 2023-05-21 023844](https://github.com/eellda/springboot-practice/assets/111367394/79dbeed8-5467-4822-9464-577ec69d9e75)
+

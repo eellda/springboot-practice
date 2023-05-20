@@ -380,3 +380,73 @@ Post 동작
 Get 동작
 ![화면 캡처 2023-05-21 023844](https://github.com/eellda/springboot-practice/assets/111367394/79dbeed8-5467-4822-9464-577ec69d9e75)
 
+### Logback
+---
+- Log4J를 기반으로 개발된 Logging library
+- log4j 에 비해 10뱆정도 빠른 퍼포먼스, 메모리 효율성 증대
+  - 순서 log4j - logback - log4j2
+
+#### 특징
+- log에 특정 레벨 설정 가능 (Trace - Debug - Info - Warn - Error)
+- 실운영과 테스트 상황에서 각각 다른 출력 레벨을 설정하여 로그 확인 가능
+- 출력 방식에 대해 설정 가능
+- 설정 파일을 일정 시간마다 스캔하여 application 중단 없이 설정 변경 가능
+- 별도의 프로그램 없이 자체적으로 로그 압축 지원
+- 로그 보관 기간 설정 가능
+> 구조
+
+#### 설정
+- 일반적으로 classpath에 있는 logback 설정 파일을 참조함
+- java legacy, spring = logback.xml
+- spring boot = logback-spring.xml
+
+#### appender
+- log의 형태 및 어디에 출력할지 설정하기 위한 영역
+  - 대표적으로 
+  - ConsoleAppender - 콘솔에 로그 출력
+  - FileAppender - 파일에 로그 저장
+  - RollingFileAppender - 여러개의 파일을 순회하여 로그 저장
+  - STMPAppender - 로그를 메일로 보냄
+  - DBAppender - 데이터베이스에 로그 저장
+
+#### encoder
+- Appender 내에 포함되는 항목이며, pattern을 사용하여 원하는 형식으로 로그를 표현함
+
+#### root
+- 설정한 Appender를 참조하여 로그의 레벨을 설정함
+- 전역 설정 - root / 지역 설정 - logger
+
+
+#### log level
+1. ERROR - 로직 수행 중에 오류가 발생한 경우, 시스템적으로 심각한 문제가 발생하여 작동이 불가한 경우
+2. WARN - 시스템 에러의 윈인이 될 수 있는 경고 레벨, 처리 가능한 사항
+3. INFO - 상태 변경과 같은 정보성 메세지
+4. DEBUG - 어플리케이션의 디버깅을 위한 메세지 레벨
+5. TRACE - DEBUG 레벨보다 더 디테일한 메세지를 표현하기 위한 레벨
+
+#### pattern
+> %logger: 패키지 포함 클래스 정보
+%logger{0}: 패키지를 제외한 클래스 이름만 출력
+%logger{length}: Logger name을 축약할 수 있음. {length}는 최대 자리 수, ex)logger{35}
+%-5level: 로그 레벨, -5는 출력의 고정폭 값(5글자), 로깅레벨이i nfo일 경우 빈칸 하나 추가
+${PID:-}: 프로세스 아이디
+%d: 로그 기록시간 출력
+%p: 로깅 레벨 출력
+%F: 로깅이 발생한 프로그램 파일명 출력
+%M: 로깅일 발생한 메소드의 명 출력
+%line: 로깅이 발생한 호출지의 라인
+%L: 로깅이 발생한 호출지의 라인
+%thread: 현재 Thread 명
+%t: 로깅이 발생한 Thread 명
+%c: 로깅이 발생한 카테고리
+%C: 로깅이 발생한 클래스 명 (%C{2}는 somePackage.SomeClass 가 출력됨)
+%m: 로그 메시지
+%msg: - 로그 메시지 (=%message)
+%n: 줄바꿈(new line)
+%%: %를 출력
+%r : 애플리케이션 시작 이후부터 로깅이 발생한 시점까지의 시간(ms)
+%d{yyyy-MM-dd-HH:mm:ss:sss}: %d는 date를 의미하며 중괄호에 들어간 문자열은 dateformat을 의미. 따라서 [2021-07-12 12:42:78]과 같은 날짜가 로그에 출력됨.
+%-4relative: %relative는 초 아래 단위 시간(밀리초)을 나타냄. -4를하면 4칸의 출력폼을 고정으로 가지고 출력. 따라서 숫자에 따라 [2021-07-12 12:42:78:232] 혹은 [2021-07-12 12:42:78:2332]와 같이 표현됨
+
+
+

@@ -281,7 +281,65 @@ This library supports:
   - equals - 내용이 같은지
   - hashcode - 같은 객체인지
   - callsuper - true 면 부모 클래스 필드 값들도 동일한지 체크
-
--@Data
+- @Data
   - @Getter / @Setter / @RequiredArgsConstructor / @ToString / @EqualsAndHashCode 를 한번에 추가
+
+### DTO / DAO / Repository / Entity
+---
+> Spring Boot Service 구조
+
+
+#### Entity (Domain)
+- databas에 쓰일 column 과 여러 entity 간의 연관관계를 정의
+- database의 테이블을 하나의 entity로 생각해도 무방
+- database의 테이블과 1:1 mapping
+- 이 class의 field 는 각 테이블 내부의 column을 의미
+
+#### Repository
+- Entity에 의해 생성된 database에 접근하는 method를 사용하기 위한 interface
+- service와 db를 연결하는 고리 역할
+- database에 적용하고자 하는 CRUD를 정의
+
+#### DAO (Data Access Object)
+- databas에 접근하는 Object를 의미
+- service가 db에 연결할 수 있게 해주는 역할
+- db를 사용하여 data를 조회하거나 조작하는 기능
+
+#### DAO (Data Transfer Object)
+- VO 라고도 불리며 계층간 data 교환을 위한 Object를 의미
+- VO 의 경우 RO의 개념을 가짐
+
+
+### ORM & JPA
+---
+#### ORM (Ojbect Relational Mapping)
+- 어플리케이션의 객체와 관계성 데이터베이스를 자동으로 mapping 해주는 것을 의미
+- 객체지향 프로그래밍과 관계성 데이터베이스의 차이로 발생하는 제약사항을 해결해주는 역할을 수행
+  - JPA, Hibernate 등
+> 구조
+
+- SQL 쿼리가 아닌 직관적인 코드로 데이터를 조작 가능
+- 재사용 및 유지보수 편리
+- DBMS에 대한 종속이 줄어듬
+
+#### 그러나
+- 복잡성이 커질 경우 ORM 만으로 구현하기 어려워짐
+- 잘못 구현할 경우 속도 저하 발생
+- 대형 쿼리는 별도의 튜닝이 필요할 수 있음
+
+#### JPA (Java Persistance API)
+- ORM 과 관련된 interface 모음
+- Java 진영에서 표준 ORM 으로 채택 되어 있음
+- ORM 이 큰 개념이라고 하면, JPA 는 더 구체화 시킨 스펙을 포함함
+
+#### Hibernate
+- ORM Framework 중 하나
+- JPA 의 실제 구현체중 하나이며 가장 많이 사용됨
+
+#### Spring Data JPA
+- Spring Framework에서 JPA를 편리하게 사용할 수 있게 지원하는 library
+- CRUD 처리용 interface 제공
+- 데이터 접근 계층 개발시 인터페이스만 작성해도 ok
+- Hibernate 에서 자주 사용되는 기능을 조금 더 쉽게 사용할 수 있게 구현
+> 구현도
 

@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MemberDTO {
+    // feild
     private String name;
     private String email;
     private String organization;

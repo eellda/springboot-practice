@@ -146,4 +146,79 @@
   - @RequestBody를 이용하여 body에 담겨있는 값을 받아야함
 - DTO 객체 사용 가능
 
+#### Swagger
+- 협업을 위해 필요한 library
+- 서버로 요청되는 API list 를 HTML 화면으로 문서화 하여 테스트를 할 수 있는 library
+- 서버가 가동 되면서 @RestController 를 읽어 API를 분석하여 HTML문서를 작성함
+- 필요한 이유
+  - REST API의 스펙을 문서화 하는것은 매우 중요하기 때문임
 
+#### Swagger 설정 방법
+- @Configuration - IoC Container 에게 해당 class를 Bean 구성 class임을 알려줌
+- @Bean - 개발자가 직접 제어 불가능한 외부 library등을 Bean으로 만들 경우 사용
+- https://mvnrepository.com/
+
+#### gradle
+```java
+implementation 'io.springfox:springfox-swagger2:2.9.2'
+implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+```
+
+#### maven
+```java
+<dependency>
+  <groupId>io.springfox</groupId>
+  <artifactId>springfox-swagger2</artifactId>
+  <version>2.9.2</version>
+</dependency>
+
+<dependency>
+  <groupId>io.springfox</groupId>
+  <artifactId>springfox-swagger-ui</artifactId>
+  <version>2.9.2</version>
+</dependency>
+```
+
+### 에러 발생
+```java
+ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'apiDocumentationScanner' defined in URL ~~~
+같은 에러 발생
+```
+
+> 구글링을 해본 결과 spring context와 관련된 설정이 중복되어 발생한 문제라고 해서 @Configuration 어노테이션을 지웠더니 스프링부트 실행 됨
+
+### 두번쩨 에러 발생
+```java
+http://localhost:8080/swagger-ui/index.html 에 접속했더니
+Swagger ERROR : Unable to infer base url. This is common when using dynamic servlet registration or when the API is behind an API Gateway. The base url is the root of where all the swagger resources are served.
+에러 발생
+```
+
+> 구글링을 해보면 Config 에 @Configuration 가 붙어있는걸 보아 얘는 달아놔야 되는걸 인식
+> 그래서 다시 달고 빌드 후 실행함
+
+### 세번쩨 에러 발생
+```java
+빌드 후 실행 해보니
+error starting applicationcontext. to display the condition evaluation report re-run your application with 'debug' enabled.
+과 함께 jar파일을 찾을수 없다는 등의 에러가 발생
+```
+
+> maven repository에서 가져온 의존성이라 build.gradle 의 repository에 maven url을 추가해줘야 되나 하고 추가해봤으나 어림없음
+> 그래서 swagger 의 버전을 3.0.0 도 해보고 2.10.5도 해봤으나 안됨
+
+### 해결
+> 버전이 달라서 그런가?
+> 내 스프링부트 버전은 3.1.0
+> 적용하고자 했던 swagger 버전은 2.9.2
+> 참고 링크 https://velog.io/@kjgi73k/Springboot3%EC%97%90-Swagger3%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0
+> dependencies 에 implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'로 변경
+
+#### springdoc-openapi v2.1.0
+This library supports:
+- OpenAPI 3
+- Spring-boot v3 (Java 17 & Jakarta EE 9)
+- JSR-303, specifically for @NotNull, @Min, @Max, and @Size.
+- Swagger-ui
+- OAuth 2
+- GraalVM native images

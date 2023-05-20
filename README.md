@@ -222,3 +222,4 @@ This library supports:
 - Swagger-ui
 - OAuth 2
 - GraalVM native images
+![2023-05-20 195319](https://github.com/eellda/springboot-practice/assets/111367394/ad49004b-29af-46aa-9da6-1587f6083912)

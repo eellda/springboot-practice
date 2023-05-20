@@ -287,7 +287,7 @@ This library supports:
 ### DTO / DAO / Repository / Entity
 ---
 > Spring Boot Service 구조
-
+![화면 캡처 2023-05-20 225207](https://github.com/eellda/springboot-practice/assets/111367394/5b9d4d82-4b65-4ef8-8efc-576733f6ca06)
 
 #### Entity (Domain)
 - databas에 쓰일 column 과 여러 entity 간의 연관관계를 정의
@@ -317,6 +317,7 @@ This library supports:
 - 객체지향 프로그래밍과 관계성 데이터베이스의 차이로 발생하는 제약사항을 해결해주는 역할을 수행
   - JPA, Hibernate 등
 > 구조
+![화면 캡처 2023-05-21 005934](https://github.com/eellda/springboot-practice/assets/111367394/7578f6b8-8f47-4b03-aaea-f0eabdceac46)
 
 - SQL 쿼리가 아닌 직관적인 코드로 데이터를 조작 가능
 - 재사용 및 유지보수 편리
@@ -342,4 +343,5 @@ This library supports:
 - 데이터 접근 계층 개발시 인터페이스만 작성해도 ok
 - Hibernate 에서 자주 사용되는 기능을 조금 더 쉽게 사용할 수 있게 구현
 > 구현도
+![화면 캡처 2023-05-21 010843](https://github.com/eellda/springboot-practice/assets/111367394/6685ff0c-d9dd-4456-b5cd-63a15786213a)
 

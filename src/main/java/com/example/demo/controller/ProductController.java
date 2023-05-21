@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.Constants;
+import com.example.demo.common.exception.DemoException;
 import com.example.demo.data.dto.ProductDto;
 import com.example.demo.service.ProductService;
 import jakarta.validation.Valid;
@@ -60,5 +62,10 @@ public class ProductController {
     @DeleteMapping("{productId}")
     public ProductDto deleteProduct(@PathVariable String productId) {
         return null;
+    }
+
+    @PostMapping("/exception")
+    public void exceptionTest() throws DemoException {
+        throw new DemoException(Constants.ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근 금지");
     }
 }

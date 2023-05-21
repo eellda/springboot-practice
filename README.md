@@ -514,3 +514,13 @@ Get 동작
   - @ControllerAdvice 로 설정된 클래스 내에서 메서드로 정의할 수 있으며 각 Controller 안에 설정도 가능
   - 전역설정(ControllerAdvice)보다 지역설정(Controller)으로 정의한 Handler가 우선순위를 가지게 됨
 
+#### Custom Exception
+- error type, error code, message를 응답함으로써 client 에 정확히 어떤 에러가 발생했는지 공유하는게 목적
+- error type - HttpStatus reasonPhrase
+- error code - HttpStatus value
+- message - 상황별 메세지
+
+#### HttpStatus
+- Enum 클래스로써 서로 관련 있는 상수들을 모아서 심볼릭한 명칙의 집합으로 정의한 것으로 클래스처럼 보이게 하는 상수
+
+

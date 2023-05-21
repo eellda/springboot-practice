@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <property name="moduleId" value="demo"></property>
+    <property name="type" value="demo"></property>
+    <property name="logback" value="logback"></property>
+    <property name="logdir" value="C://Workspace/LogFiles"></property>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <lelvel>DEBUG</lelvel>
+    </filter>
+    <encoder>
+<!--        <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %logger %msg%n</pattern>-->
+<!--        패키지명 단축-->
+        <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %logger{30} %msg%n</pattern>
+    </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="console"></appender-ref>
+    </root>
+</configuration>

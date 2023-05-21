@@ -450,4 +450,40 @@ Get 동작
 > %-4relative: %relative는 초 아래 단위 시간(밀리초)을 나타냄. -4를하면 4칸의 출력폼을 고정으로 가지고 출력
 
 
+### 유효성 검사
+---
+- 서비스의 로직이 올바르게 동작하기 위해 사용되는 데이터에 대한 사전 검증하는 작업이 필요함
+- validation이라고 부름
+- 데이터의 검증은 여러 계층에서 발생하는 흔한 작업
+- 들어오는 데이터에 대해 의도한 형식의 값이 제대로 들어오는지 체크하는 과정을 뜻
 
+#### 일반적인 validation의 문제점
+- 어플리케이션 전체적으로 분산되어 존재
+- 코드의 중복이 심함
+- 비즈니스 로직에 섞여 있어 검사 로직 추적이 어려움
+
+> 위 문제점들을 해결하기 위해
+- Bean Validation / Hibernate Validator 를 제공
+- Bean Validation
+  - Java 에서 2009년부터 제공하는 데이터 유효성 검사 Framework
+  - 어노테이션을 통해 다양한 데이터 검증을 할 수 있게 기능 제공
+- Hibernate Validator
+  - Bean Validation 명세에 대한 구현체
+- Spring Boot 유효성 검사 표준은 Hibernate Validator
+  - 단, 2.3v 부터는 starter-validation을 추가해야함
+
+#### 관련 어노테이션
+> @Size
+> @NotNull
+> @NotEmpty
+> @NotBlank
+> @Past
+> @PastOrPresent
+> @Future
+> @FutureOrPresent
+> @Pattern
+> @Max
+> @Min
+> @AssertTrue
+> @AssertFalse
+> @Value

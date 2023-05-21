@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.data.dto.ProductDto;
 import com.example.demo.service.ProductService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,13 +35,26 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {// dto에 달아놓은 어노테이션 적용
+
+        // validation exam
+        if (productDto.getProductId().equals("") || productDto.getProductId().isEmpty()) {
+            LOGGER.error("[createProduct] failed Response :: productId is Empty");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productDto);
+        }
+        // 메서드 마다 이런 코드들이 추가가 되면 가독성이 떨어지므로 어노테이션을 지향함
+
         String productId = productDto.getProductId();
         String productName = productDto.getProductName();
         int productPrice = productDto.getProductPrice();
         int productStock = productDto.getProductStock();
 
-        return productService.saveProduct(productId, productName, productPrice, productStock);
+        ProductDto response = productService.saveProduct(productId, productName, productPrice, productStock);
+
+        LOGGER.info("[createProduct] Response >> productId : {}, productName : {}, productPrice : {}, productStock : {}",
+                response.getProductId(), response.getProductName(), response.getProductPrice(), response.getProductStock());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("{productId}")

@@ -524,3 +524,20 @@ Get 동작
 - Enum 클래스로써 서로 관련 있는 상수들을 모아서 심볼릭한 명칙의 집합으로 정의한 것으로 클래스처럼 보이게 하는 상수
 
 
+### Rest Template
+---
+- 스프링에서 제공하는 HTTP 통신 기능을 쉽게 사용할 수 있게 설계되어 있는 템플릿
+- HTTP 서버와의 통신을 단순화하고 RESTful 원칙을 지킴
+- 동기 방식이며 비동기 방식으로는 AsyncRestTemplate가 있음
+- RestTemplate 클래스는 REST 서비스를 호출하도록 설계되어 HTTP protocol의 method에 맞게 여러 method 를 제공함
+- method들
+  - getForObject
+  - getForEntity
+  - postForObject
+  - postForEntity
+  - delete
+  - put
+  - patchForObject
+  - exchange
+
+- server project 하나 더 필요

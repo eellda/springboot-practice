@@ -487,3 +487,30 @@ Get 동작
 > @AssertTrue
 > @AssertFalse
 > @Value
+
+
+### Exception
+---
+- 스프링 부트의 예외 처리 방식은 크게 2가지
+  - @ControllerAdvice를 통한 모든 Controller에서 발생할 수 있는 예외 처리
+  - @ExceptionHandler를 통한 특정 Controller의 예외 처리
+  - @ControllerAdvice로 모든 Controller에서 발생할 Exception을 정의하고
+    - @ExceptionHandler를 통해 발생하는 Exception 마다 처리할 method를 정의
+
+#### 예외 클래스
+- 모든 예외 클래스는 Throwable 클래스를 extends 함
+- Exception 은 수많은 자식 클래스가 있으며, RuntimeException 은 Unchecked Exception이며, 그 외 Exception은 Checked Exception으로 볼 수 있다
+
+- @ControllerAdvice / @RestControllerAdvice
+  - Spring에서 제공하는 어노테이션
+  - @Controller나 @RestController에서 발생하는 예외를 한 곳에서 관리하고 처리할 수 있게 하는 어노테이션
+  - 설정을 통해 범위 지정 가능 / Default 값으로 모든 Controller에 대해서 예외처리를 관리함
+  - 예외 발생시 json의 형태로 결과를 반환하기 위해선 @RestControllerAdvice를 사용
+
+- @ExceptionHandler
+  - 예외 처리 상황이 발생하면 Handler로 처리하겠다고 명시하는 어노테이션
+  - 뒤에 괄호를 붙임으로써 어떤 ExceptionClass를 처리할지 설정 가능
+  - Exception.class는 최상위 클래스로 하위 세부 예외 처리 클래스로 설정한 핸들러가 존재할 경우 그 핸들러가 우선처리 하게 되며, 처리 하지 못하는 예외 처리에 대해 ExceptionClass에서 핸들링함
+  - @ControllerAdvice 로 설정된 클래스 내에서 메서드로 정의할 수 있으며 각 Controller 안에 설정도 가능
+  - 전역설정(ControllerAdvice)보다 지역설정(Controller)으로 정의한 Handler가 우선순위를 가지게 됨
+

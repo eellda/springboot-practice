@@ -747,3 +747,6 @@ Get 동작
 - spring-boot-starter-security - 스프링 시큐리티
 - spring-boot-starter-data-jpa - Spring Data JPA (Hibernate)
 - spring-boot-starter-cache 캐시
+
+
+### Naver 단축 URL

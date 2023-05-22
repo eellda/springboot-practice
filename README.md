@@ -632,3 +632,59 @@ Get 동작
 - Self-Validation - 테스트는 그 자체로 실행하여 결과를 확인할 수 있어야 한다
 - Timely - 단위 테스트는 비즈니스 코드가 완성되기 전에 구성하고 테스트가 가능해야 한다 (TDD의 원칙을 담고 있음)
 
+### 테스트 커버리지
+---
+- 코드 커버리지
+  - 소프트웨어의 테스트 수준이 충분한지 표현할 수 있는 지표중 하나
+  - 테스트를 진행했을 때 해당 코드가 실행 되었는지를 표현하는 방법
+  - 가장 보편적으로 사용되는건 Jacoco
+
+#### Jacoco
+- Java 코드의 커버리지를 체크하는 library
+- 작성된 커드의 테스트 커버리지를 측정하는 도구
+- Runtime으로 Test Case를 실행하여 Coverage를 체크하는 방식으로 사용
+- 테스트 코드를 통해 테스트를 실행하고 그 결과를 html, xml, cvs 등의 형식으로 레포트 제공
+
+> Black Box Test
+- 소프트웨어 내부 구조나 작동 원리를 모르는 상태에서 동작을 검사하는 방식
+- 다양한 값을 입력하여 올바른 출력이 나오는지 테스트
+- 사용자 관점의 테스트 방법
+> White Box Test
+- 소프트웨어의 내부 구조와 동작을 검사하는 테스트 방식
+- 소프트웨어 내부 소스 코드를 테스트하는 방법
+- 개발자 관점의 테스트 방법
+
+> xml
+- Execution 내부 사용값
+  - prepare-agent
+    - 테스트 중인 어플리케이션에서 인수를 전달하는 JRA에 대한 프로퍼티 준비
+  - merge
+    - 여러 실행 데이터 파일들을 하나로 통합하는 명령어
+  - report
+    - 하나의 프로젝트 테스트에 대한 Code Coverage 리포트를 생성하는 명령어
+  - check
+    - Code coverage mertric 이 출동하는지 확인하는 명령어
+
+> Jacoco Rule
+- Element type - 코드 커버리지 체크 기준
+  - BUNDLE (default) - 패키지 번들
+  - PACKAGE - 패키지
+  - CLASS - 클래스
+  - SOURCEFILE - 소스파일
+  - METHOD - 메서드
+
+- Counter - 코드 커버리지를 측정할 때 사용하는 지표
+  - LINE - 빈줄을 제외한 실제 소스코드 라인수
+  - BRANCH - 조건문 등의 분기수
+  - CLASS - 클래스 수
+  - METHOD - 메서드 수
+  - INSTRUCTION (default) - java 바이트 코드 명령 수
+  - COMPLEXITY - 복잡도
+
+- Value - 커버리지 정도를 나타내는 지표
+  - TOTALCOUNT - 전체 개수
+  - MISSEDCOUNT - 커버되지 않은 개수
+  - COVEREDCOUNT - 커버된 개수
+  - MISSEDRATION - 커버되지 않은 비율 (0 ~ 1)
+  - COVEREDRATIO (default) - 커버된 비율 (0 ~ 1)
+

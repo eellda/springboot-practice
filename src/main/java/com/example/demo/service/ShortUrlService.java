@@ -6,6 +6,6 @@ public interface ShortUrlService {
     ShortUrlResponseDto getShortUrl(String clientId, String clientSecret, String originalUrl);
     ShortUrlResponseDto generateShortUrl(String clientId, String clientSecret, String originalUrl);
     ShortUrlResponseDto updateShortUrl(String clientId, String clientSecret, String originalUrl);
-    ShortUrlResponseDto deleteShortUrl(String shortUrl);
-    ShortUrlResponseDto deleteByOriginaltUrl(String originalUrl);
+    void deleteShortUrl(String shortUrl);
+
 }

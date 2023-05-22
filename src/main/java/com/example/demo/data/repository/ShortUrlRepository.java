@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ShortUrlRepository extends JpaRepository<ShortUrlEntity, Long> {
     ShortUrlEntity findByUrl(String url);
-    ShortUrlEntity findByUrl(String originalUrl);
+    ShortUrlEntity findByOrgUrl(String originalUrl);
 }

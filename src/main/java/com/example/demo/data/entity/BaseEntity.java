@@ -11,8 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Data
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass // 중요
+@EntityListeners(AuditingEntityListener.class) // 저장되는 시점의 이전인지 이후인지 확인 후 특정 행동을 함
 public class BaseEntity {
 
     @CreatedDate

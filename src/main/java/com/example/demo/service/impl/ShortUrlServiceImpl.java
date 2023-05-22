@@ -4,6 +4,7 @@ import com.example.demo.data.dao.ShortUrlDAO;
 import com.example.demo.data.dto.NaverUriDto;
 import com.example.demo.data.dto.ShortUrlResponseDto;
 import com.example.demo.data.entity.ShortUrlEntity;
+import com.example.demo.data.repository.ShortUrlRepository;
 import com.example.demo.service.ShortUrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,20 +80,31 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     }
 
     @Override
-    public ShortUrlResponseDto deleteShortUrl(String shortUrl) {
-        return null;
+    public void deleteShortUrl(String url) {
+        if (url.contains("me2.do")) {
+            LOGGER.info("[deleteShortUrl] Requset Url is 'ShortUrl'.");
+            deleteByShortUrl(url);
+        } else {
+            LOGGER.info("[deleteShortUrl] Requset Url is 'OriginalUrl'.");
+            deleteByOriginalUrl(url);
+        }
     }
 
-    @Override
-    public ShortUrlResponseDto deleteByOriginaltUrl(String originalUrl) {
-        return null;
+    public void deleteByShortUrl(String url) {
+        LOGGER.info("[deleteByShortUrl] delete record");
+        shortUrlDAO.deleteByShortUrl(url);
+    }
+
+    public void deleteByOriginalUrl(String url) {
+        LOGGER.info("[deleteByOriginalUrl] delete record");
+        shortUrlDAO.deleteByShortUrl(url);
     }
 
     private ResponseEntity<NaverUriDto> requestShortUrl(String clientId, String clientSecret, String originalUrl) {
         LOGGER.info("[requestShortUrl] client ID : ****, client Secret : ****, original URL : {}", originalUrl);
 
         URI uri = UriComponentsBuilder.fromUriString("https://openapi.naver.com")
-                .path("/v1/util/shortrul")
+                .path("/v1/util/shorturl")
                 .queryParam("url", originalUrl)
                 .encode()
                 .build()

@@ -688,3 +688,62 @@ Get 동작
   - MISSEDRATION - 커버되지 않은 비율 (0 ~ 1)
   - COVEREDRATIO (default) - 커버된 비율 (0 ~ 1)
 
+### Spring vs Spring Boot
+---
+#### Spring
+- 정확한 표현으로는 Spring Framework
+- 자바에서 가장 많이 사용되는 프레임워크
+- 의존성 주입(DI), 제어역전(IOC), 관점 지향 프로그래밍(AOP)이 가장 중요한 요소
+- 위 요소들을 통해 Loose Coupling을 달성할 수 있음
+- 루즈커플링으로 개발안 application은 단위 테스트를 수행하기 용이함
+
+#### Dependency Injectio
+> DI를 사용하지 않을 경우
+- Controller 는 Service객체에 의존하게 됨
+- 객체의 인스턴스를 얻게 되면 객체 간 결합도 가 올라감
+- 단위 테스트를 위해 Mock 객체를 사용할 수 없게 됨
+> DI 사용
+- @Service, @Autowired 어노테이션을 통해 Service의 인스턴스를 회득
+- 어노테이션을 사용하여 코드를 작성하면 단위 테스트 상황에서 Service 객체를 Mock 객체로 대체하여 쉽게 테스트 가능
+
+#### Aspect Oriented Programming
+- Spring Framework에서 제공하는 강력한 기능 중 하나
+- OOP를 보완하는 수단으로, 여러 곳에 쓰이는 공통 기능을 모듈화 하여 필요한 곳에 연결함으로써 유지보수 또는 재사용에 용이하도록 하는 것을 의미
+- AOP를 통해 기존 프로젝트에 다양한 기능을 로직 수정 없이 추가할 수 있음
+- 결합도를 낮춘 개발이 가능함
+
+#### Spring Framework의 대표적 모듈 (약 20개)
+- 많이 사용되는 모듈
+  - Spring JDBC
+  - Spring MVC
+  - Spring AOP
+  - Spring ORM
+  - Spring Test
+  - Spring Expression Language
+
+### Spring Boot 가 나오게 된 이유
+---
+> Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
+- 스프링은 다양한 기능을 제공하고 있으나 기능들을 사용하기 위한 설정에 많은 시간이 소요됨
+- Spring Boot 는 자동설정인 AutoConfiguration 을 이용함
+  - Application 개발에 필요한 모든 의존성을 Framework 내에서 관리함
+  - jar파일이 classPath 에 있는 경우 스프링 부트는 Dispather Servlet 으로 자동 구성됨
+  - 스프링 부트는 미리 설정되어 있는 Starter 프로젝트를 제공함
+  - xml 설정 없이 자바 코드를 통해 설정할 수 있음
+- Application을 개발하면서 사용되는 의존성들은 호환 되는 버전으로 관리 해줘야 함
+  - 이런 복잡도를 줄이기 위해 스프링 부트는 SpringBoot-starter 를 제공하여 자동으로 호환되는 버전을 관리함
+- 모니터링 관리를 위한 Spring Actuator 제공
+  - 서비스가 정상적으로 동작하는지 상태 모니터링 기능 제공
+  - Spring Actuator는 스프링 부트에서 제공하는 상태 정보를 보다 쉽게 모니터링 할 수 있게 기능을 제공
+- 의존성 관리
+  - Spring Boot Starter Dependency를 통해 다양한 패키지를 수용함
+  - 개발자는 dependency 관리에 대해 고려할 필요가 없어짐
+
+> starter dependency
+- spring-boot-starter-web-service - SOAP 웹 서비스
+- spring-boot-starter-web - RESTful 응용 프로그램
+- spring-boot-starter-test - 단위테스트, 통합테스트
+- spring-boot-starter-jdbc - 기본적인 JDBC
+- spring-boot-starter-security - 스프링 시큐리티
+- spring-boot-starter-data-jpa - Spring Data JPA (Hibernate)
+- spring-boot-starter-cache 캐시

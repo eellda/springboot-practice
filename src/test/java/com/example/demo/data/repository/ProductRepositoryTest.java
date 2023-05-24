@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -202,8 +205,9 @@ public class ProductRepositoryTest {
         System.out.println(productRepository.findByProductNameContaining("상품1"));
     }
 
+    /* @Query 사용하기 */
     @Test
-    void orderByTest() {
+    public void queryTest() {
         List<ProductEntity> foundAll = productRepository.findAll();
         System.out.println("====↓↓ Test Data ↓↓====");
         for (ProductEntity product : foundAll) {
@@ -211,24 +215,14 @@ public class ProductRepositoryTest {
         }
         System.out.println("====↑↑ Test Data ↑↑====");
 
-        List<ProductEntity> foundProducts = productRepository.findByNameContainingOrderByStockAsc("상품");
-        for(ProductEntity product : foundProducts){
-            System.out.println(product);
-        }
-
-        foundProducts = productRepository.findByNameContainingOrderByStockDesc("상품");
-        for(ProductEntity product : foundProducts){
-            System.out.println(product);
-        }
-
-        foundProducts = productRepository.findByNameContainingOrderByPriceAscStockDesc("상품");
-        for(ProductEntity product : foundProducts){
+        List<ProductEntity> foundProducts = productRepository.findByPriceBasis();
+        for (ProductEntity product : foundProducts) {
             System.out.println(product);
         }
     }
 
     @Test
-    void multiOrderByTest() {
+    public void nativeQueryTest() {
         List<ProductEntity> foundAll = productRepository.findAll();
         System.out.println("====↓↓ Test Data ↓↓====");
         for (ProductEntity product : foundAll) {
@@ -236,14 +230,14 @@ public class ProductRepositoryTest {
         }
         System.out.println("====↑↑ Test Data ↑↑====");
 
-        List<ProductEntity> foundProducts = productRepository.findByNameContainingOrderByPriceAscStockDesc("상품");
-        for(ProductEntity product : foundProducts){
+        List<ProductEntity> foundProducts = productRepository.findByPriceBasisNativeQuery();
+        for (ProductEntity product : foundProducts) {
             System.out.println(product);
         }
     }
 
     @Test
-    void orderByWithParameterTest() {
+    public void parameterQueryTest() {
         List<ProductEntity> foundAll = productRepository.findAll();
         System.out.println("====↓↓ Test Data ↓↓====");
         for (ProductEntity product : foundAll) {
@@ -251,19 +245,14 @@ public class ProductRepositoryTest {
         }
         System.out.println("====↑↑ Test Data ↑↑====");
 
-        List<ProductEntity> foundProducts = productRepository.findByNameContaining("상품", Sort.by(Sort.Order.asc("price")));
-        for(ProductEntity product : foundProducts){
-            System.out.println(product);
-        }
-
-        foundProducts = productRepository.findByNameContaining("상품", Sort.by(Sort.Order.asc("price"), Sort.Order.asc("stock")));
-        for(ProductEntity product : foundProducts){
+        List<ProductEntity> foundProducts = productRepository.findByPriceWithParameter(2000);
+        for (ProductEntity product : foundProducts) {
             System.out.println(product);
         }
     }
 
     @Test
-    void pagingTest() {
+    public void parameterNamingQueryTest() {
         List<ProductEntity> foundAll = productRepository.findAll();
         System.out.println("====↓↓ Test Data ↓↓====");
         for (ProductEntity product : foundAll) {
@@ -271,13 +260,39 @@ public class ProductRepositoryTest {
         }
         System.out.println("====↑↑ Test Data ↑↑====");
 
-        List<ProductEntity> foundProducts = productRepository.findByPriceGreaterThan("200", PageRequest.of(0, 2));
-        for(ProductEntity product : foundProducts){
+        List<ProductEntity> foundProducts = productRepository.findByPriceWithParameterNaming(2000);
+        for (ProductEntity product : foundProducts) {
             System.out.println(product);
         }
+    }
 
-        foundProducts = productRepository.findByPriceGreaterThan("200", PageRequest.of(2, 2));
-        for(ProductEntity product : foundProducts){
+    @Test
+    public void parameterNamingQueryTest2() {
+        List<ProductEntity> foundAll = productRepository.findAll();
+        System.out.println("====↓↓ Test Data ↓↓====");
+        for (ProductEntity product : foundAll) {
+            System.out.println(product.toString());
+        }
+        System.out.println("====↑↑ Test Data ↑↑====");
+
+        List<ProductEntity> foundProducts = productRepository.findByPriceWithParameterNaming2(2000);
+        for (ProductEntity product : foundProducts) {
+            System.out.println(product);
+        }
+    }
+
+    @Test
+    public void nativeQueryPagingTest() {
+        List<ProductEntity> foundAll = productRepository.findAll();
+        System.out.println("====↓↓ Test Data ↓↓====");
+        for (ProductEntity product : foundAll) {
+            System.out.println(product.toString());
+        }
+        System.out.println("====↑↑ Test Data ↑↑====");
+
+        List<ProductEntity> foundProducts = productRepository.findByPriceWithParameterPaging(2000,
+                PageRequest.of(2, 2));
+        for (ProductEntity product : foundProducts) {
             System.out.println(product);
         }
     }

@@ -778,3 +778,59 @@ Get 동작
 - @CreatedBy : 엔티티가 저장되는 시점에 저장 주체가 누구인지 주입
 - @LastModifiedDate : 엔티티가 수정되는 시점에 자동으로 시간을 주입 
 - @LastModifiedBy : 엔티티가 수정되는 시점에 수정 주체가 누구인지 주입
+
+### 쿼리 메소드
+---
+#### JPQL
+- Java Persistence Query Language의 줄임말
+- 테이블이 아닌 엔티티 객체를 대상으로 사용되는 객체지향 쿼리
+- JPA는 JPQL을 분석한 후 연동되어 있는 데이터베이스에 맞는 SQ로 가공하여 사용
+
+#### 쿼리 메소드
+- Spring Data JPA의 핵심 기능
+- JpaRepository에서 제공하는 기본 메소드 만으로는 비즈니스 로직을 처리하는데 한계가 있음
+- Repository 내 정의되는 메소드의 이름만으로 쿼리를 생성할 수 있음
+- 이름을 짓는 것에는 특별한 규칙이 존재(네이밍 컨벤션)하며, 규칙에 맞게 이름을 지으면 그에 맞는 쿼리가 자동 생성됨
+
+#### 문법
+- 크게 주제(Subiect)와 서술어(Predicate)로 구분됨
+- 'find..by, 'exists..by와 같은 키워드로 주제를 정하며 by는 서술어의 시작을 나타냄
+- 서술어 영역은 검색 및 정렬 조건을 작성
+
+> 쿼리 메소드의 주제 키워드
+- find.by, read….by, get..by, query..by
+  - 조회 기능을 수행하는 키워드.
+  - '의 영역은 엔티티를 표현할 수 있으나 Repository에서 이미 엔티티를 정의하고 있기 때문에 생략하는 경우가 많음
+  - 리턴 타입은 Collection이나 Streamable에 속하는 타입을 설정할 수 있음
+- exists…by
+  - 특정 데이터가 존재하는지 확인하는 기능을 수행하는 키워드
+  - 리턴 타입은 boolean 속성을 사용
+- count…by
+  - 조회 쿼리를 수행한 후 결과 개수를 리턴하는 키워드
+  - long 타입으로 리턴
+- delete…by, remove..by
+  - 삭제 쿼리를 수행
+  - 리턴 타입이 없거나 삭제한 횟수를 리턴
+- ... First<number>... ...Top<number>...
+  - 쿼리를 통해 조회되는 결과값의 수를 제한하는 키워드
+  - 일반적으로 여러 건을 조회하기 위해 사용되지만 단 건으로 조회할 경우 <number> 부분을 생략하면 됨
+
+> 쿼리 메소드의 조건자 키워드
+- IS
+  - 값의 일치를 위한 조건자 키워드
+  - Equals 키워드와 동일한 기능을 수행
+- (Is)Not
+  - 값의 불일치를 위한 조건자 키워드
+  - 15는 생락하고 Not 키워드만 사용할 수 있음
+- (Is) Null, (Is) NotNull
+  - 해당 컬럼의 레코드의 값이 Null인지 아닌지 체크하는 키워드
+- (Is) True, (Is)False
+  - boolean 타입으로 지정되어 있는 컬럼의 값을 확인하는 키워드
+- And, Or
+  - 여러 조건을 묶을 때 사용
+- (Is) GreaterThan, (Is) LessThan, (Is)Between
+  - 숫자나 Date Time 컬럼에서 사용할 수 있는 비교 연산 키워드
+  - 경계값을 포함하기 위해서는 Equal 키워드를 추가해야 함
+- (Is)StartingWith(==StartsWith), (Is)Ending With(==EndsWith), (Is)Containing(==Contains), (Is) Like
+  - 컬럼의 값에서 값이 일부 일치하는지 확인하는 키워드
+  - SQL 문으로 가공될 때 Containing 키워드는 양 끝, startingwith는 앞, Endingwith는 뒤에 %가 포함됨 Like 키워드는 %를 명시적으로 기입해줘야 함

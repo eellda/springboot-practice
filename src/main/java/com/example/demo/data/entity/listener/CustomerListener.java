@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// JpaAuditing 동적 원리 체크
 public class CustomerListener {
     private final Logger LOGGER = LoggerFactory.getLogger(CustomerListener.class);
 

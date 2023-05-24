@@ -1,5 +1,6 @@
 package com.example.demo.data.entity;
 
+import com.example.demo.data.dto.ProductDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,6 +9,8 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,4 +23,13 @@ public class ProductEntity {
     String productName;
     Integer productPrice;
     Integer productStock;
+
+    public ProductDto toDto() {
+        return ProductDto.builder()
+                .productId(productId)
+                .productName(productName)
+                .productPrice(productPrice)
+                .productStock(productStock)
+                .build();
+    }
 }

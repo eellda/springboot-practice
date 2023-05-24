@@ -765,3 +765,16 @@ Get 동작
 - Entity 객체를 데이터베이스에 적용하기 전/후에 콜백을 요청하는 어노테이션
 - 파라미터로 콜백을 요청할 클래스를 지정하여 사용
 - @EntityLister의 요청 시점은 아래와 같음
+  - @PostLoad
+  - @PrePersist (전)
+  - @PostPersist (이후)
+  - @PreUpdate
+  - @PostUpdate
+  - @PreRemove
+  - @PostRemove
+
+#### Jpa Auditing Annotation
+- @CreatedDate : 엔티티가 저장되는 시점에 자동으로 시간을 주입 
+- @CreatedBy : 엔티티가 저장되는 시점에 저장 주체가 누구인지 주입
+- @LastModifiedDate : 엔티티가 수정되는 시점에 자동으로 시간을 주입 
+- @LastModifiedBy : 엔티티가 수정되는 시점에 수정 주체가 누구인지 주입

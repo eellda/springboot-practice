@@ -1,6 +1,8 @@
 package com.example.demo.data.repository;
 
 import com.example.demo.data.entity.ProductEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -21,6 +23,19 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
 
     List<ProductEntity> findFirst5ByProductName(String name);
     List<ProductEntity> findTop3ByProductName(String name);
+
+    // 정렬과 페이징
+
+    List<ProductEntity> findByNameContainingOrderByStockAsc(String name);
+    List<ProductEntity> findByNameContainingOrderByStockDesc(String name);
+
+    List<ProductEntity> findByNameContainingOrderByPriceAscStockDesc(String name);
+
+    // 매개변수를 활용한 정렬
+    List<ProductEntity> findByNameContaining(String name, Sort sort);
+
+    // 페이징 처리
+    List<ProductEntity> findByPriceGreaterThan(String name, Pageable pageable);
 
     // 조건자
 

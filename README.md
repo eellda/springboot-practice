@@ -750,3 +750,18 @@ Get 동작
 
 
 ### Naver 단축 URL
+
+#### @MappedSuperclass
+- 여러 Entity 객체에서 사용되는 공통 속성이 존재할 경우가 많음
+  - 대표적으로 id, createdAt, updatedAt 등이 있음
+- 공통되는 속성을 별도의 클래스 구분하여 @MappedSuperclass를 선언한 후 사용
+- 코드상 분리되어 있는 것이며, 데이터베이서의 테이블 개념에서는 분리되어 있지 않음
+
+#### JPA Auditing
+- JPA 에서의 Auditing은 각 Entity 별로 누가, 언제 접근했는지 기록하여 감시 체계를 꾸리는 것을 의미함
+- Spring Data JPA 에서 이 기능을 사용하기 위해서는 @EnableJpaAuditing을 사용해야 함
+
+#### @EntityListener
+- Entity 객체를 데이터베이스에 적용하기 전/후에 콜백을 요청하는 어노테이션
+- 파라미터로 콜백을 요청할 클래스를 지정하여 사용
+- @EntityLister의 요청 시점은 아래와 같음

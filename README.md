@@ -895,3 +895,29 @@ Get 동작
 - Remote Dictionary Server
   -  '키-값 ' 구조의 데이터를 저장하고 관리하기 위한 _ 오픈 소스 기반의 비관계형 데이터 관리 시스템
   -  https://redis.io/
+
+
+### 인터셉터
+---
+- DispatcherServlet과 Controller 사이에서 request를 가로채는 역할을 수행
+- 기존의 로직을 수정하지 않고 비즈니스 로직 전후에서 특정 기능을 수행할 수 있음
+- HandlerInterceptor를 사용
+#### 구조
+- preHandle
+  - 컨트롤러로 요청이 가기 전에 수행할 코드를 작성하는 메소드
+  - return 값이 true 일 경우 컨트롤러로 요청을 전달하고 false 일 경우 컨트롤러로 전달하지 않음
+- postHandle
+  - 컨트롤러의 로직이 수행된 이후 View가 렌더링 되기 전에 수행할 코드를 작성하는 메소드
+- afterCompletion
+  - View가 렌더링 된 후에 실행되는 메소드
+
+#### HttpServletRequest / HttpServletResponse
+- WAS 가 요청을 받으면 HttpServletRequest 와 HttpServletResponse 객체를 생성하여 Web Application으로 전달
+- HttpServletRequest
+  - Http 프로토콜의 요청 정보를 서블릿으로 전달하기 위해 사용되는 객체
+  - Header, Parameter, Cookie, Url, Uri 등의 정보를 가짐
+  - Body의 값을 읽기 위한 메소드를 가짐
+- HttpServletResponse
+  - 요청에 대한 응답값을 담기 위한 객체
+  - Content-Type이나 응답코드, 메세지를 가짐
+  

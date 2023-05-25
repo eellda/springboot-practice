@@ -834,3 +834,41 @@ Get 동작
 - (Is)StartingWith(==StartsWith), (Is)Ending With(==EndsWith), (Is)Containing(==Contains), (Is) Like
   - 컬럼의 값에서 값이 일부 일치하는지 확인하는 키워드
   - SQL 문으로 가공될 때 Containing 키워드는 양 끝, startingwith는 앞, Endingwith는 뒤에 %가 포함됨 Like 키워드는 %를 명시적으로 기입해줘야 함
+
+### 정렬과 페이징
+---
+#### 정렬
+- 일반적인 쿼리문을 작성할 때 정렬을 사용하기 위해서는 'ORDER BY' 구문을 사용
+- 특정 컬럼을 기준으로 오름차순 또는 내림차순으로 정렬된 레코드 목록을 응답 받음
+> 정렬처리
+- Asc : 오름차순
+- Desc : 내림차순
+
+#### 매개 변수를 활용한 정렬 처리
+- 메소드 이름에 정렬 키워드를 넣는 방법이 아닌 Sort 객체를 활용하여 정렬 기준을 설정할 수 있음
+
+#### 매개 변수를 활용한 페이징 처리
+- 페이징 처리를 하면 리턴 타입으로 Page를 설정하고 매개변수로 Pageable 객체를 사용
+
+### @Query 어노테이션
+---
+- 쿼리메소드를 통해 쿼리를 생성하는 방식은 조건이 많아질 경우 메소드의 이름이 길어져 가독성이 떨어짐
+- 비교적 복잡한 쿼리를 작성하기 위해 사용됨
+- Spring Data JPA에서 제공하는 기능으로 JPaL을 사용하여 쿼리를 작성하는 방법
+- JPQL은 SQL과 문법이 거의 비슷하기 때문에 사용하는데 용이함
+- JPQL은 엔티티 객체를 대상으로 쿼리를 수행함
+
+#### 기본 쿼리 작성 방법
+- 직접 쿼리를 사용하는 방법
+  - @Query("SELECT p FROM Product p WHERE p.price > 2000")
+- DB의 Native Query를 사용하는 방법
+  - @Query(value = "SELECT * FROM product p WHERE p.price > 2000", nativeQuery = true)
+- 파라미터를 쿼리에 주입하는 방법
+  - @Query("SELECT p FROM Product p WHERE p.price > ?1")
+- :parameter 방식으로 주입하는 방법
+  - @Query("SELECT p FROM Product p WHERE p.price > :price")
+
+### application.properties 암호화
+---
+#### Jasypt
+- 개발자가 암호화 작동 방식에 대한 깊은 지식 없이도 최소한의 노력으로 자신의 프로젝트에 기본 암호화 기능을 추가할 수 있도록 하는 Java 라이브러리

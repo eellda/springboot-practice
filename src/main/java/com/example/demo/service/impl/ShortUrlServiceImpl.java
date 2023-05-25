@@ -4,7 +4,7 @@ import com.example.demo.data.dao.ShortUrlDAO;
 import com.example.demo.data.dto.NaverUriDto;
 import com.example.demo.data.dto.ShortUrlResponseDto;
 import com.example.demo.data.entity.ShortUrlEntity;
-import com.example.demo.data.repository.ShortUrlRepository;
+import com.example.demo.data.repository.ShortUrlRedisRepository;
 import com.example.demo.service.ShortUrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,21 +16,34 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class ShortUrlServiceImpl implements ShortUrlService {
     private final Logger LOGGER = LoggerFactory.getLogger(ShortUrlServiceImpl.class);
     private final ShortUrlDAO shortUrlDAO;
+    private final ShortUrlRedisRepository shortUrlRedisRepository;
 
     @Autowired
-    public ShortUrlServiceImpl(ShortUrlDAO shortUrlDAO) {
+    public ShortUrlServiceImpl(ShortUrlDAO shortUrlDAO, ShortUrlRedisRepository shortUrlRedisRepository) {
         this.shortUrlDAO = shortUrlDAO;
+        this.shortUrlRedisRepository = shortUrlRedisRepository;
     }
 
     @Override
     // 기능 구현이 목적인 메서드
     public ShortUrlResponseDto getShortUrl(String clientId, String clientSecret, String originalUrl) {
         LOGGER.info("[getShortUrl] request data : {}", originalUrl);
+
+        Optional<ShortUrlResponseDto> foundResponseDto = shortUrlRedisRepository.findById(originalUrl);
+
+        if (foundResponseDto.isPresent()) {
+            LOGGER.info("[getShortUrl] Cache Data is existed");
+            return foundResponseDto.get();
+        } else {
+            LOGGER.info("[getShortUrl] Cache Data is not existed");
+        }
+
         ShortUrlEntity getShortUrlEntity = shortUrlDAO.getShortUrl(originalUrl);
 
         String orgUrl;
@@ -70,6 +83,9 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         shortUrlDAO.saveShortUrl(shortUrlEntity);
 
         ShortUrlResponseDto shortUrlResponseDto = new ShortUrlResponseDto(orgUrl, shortUrl);
+
+        shortUrlRedisRepository.save(shortUrlResponseDto);
+
         LOGGER.info("[generateShortRul] Presponse DTO : {}", shortUrlResponseDto.toString());
         return shortUrlResponseDto;
     }

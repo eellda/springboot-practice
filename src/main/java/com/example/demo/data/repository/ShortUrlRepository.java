@@ -5,6 +5,6 @@ import com.example.demo.data.entity.ShortUrlEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ShortUrlRepository extends CrudRepository<ShortUrlResponseDto, String> {
+public interface ShortUrlRepository extends JpaRepository<ShortUrlResponseDto, String> {
 
 }
